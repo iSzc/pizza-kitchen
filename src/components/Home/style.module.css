@@ -1,0 +1,7 @@
+.btnAni {
+  transition: transform 0.3s ease-in-out;
+}
+
+.btnAni:hover {
+  transform: scale(1.1);
+}

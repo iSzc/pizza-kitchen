@@ -1,0 +1,35 @@
+.modal {
+  display: hidden;
+}
+
+.animation {
+  animation: hambMenu 0.3s ease-in;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes hambMenu {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+.logoStyle {
+  filter: invert(100%);
+  animation: fade 0.2s ease-in;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.menuIcon {
+  filter: invert(100%);
+}

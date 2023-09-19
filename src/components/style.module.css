@@ -1,0 +1,100 @@
+.imgFooter {
+  filter: invert(100%);
+}
+
+.popupactive {
+  opacity: 1;
+  z-index: 100;
+  animation: popup 0.5s forwards ease-in-out;
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(60px);
+    opacity: 1;
+  }
+}
+
+.message {
+  animation: message 0.3s ease-out both;
+}
+
+@keyframes message {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translateY(-37px);
+  }
+}
+
+.reverseAnimationMessage {
+  animation: reverseAnimationMessage 0.3s ease-in-out both;
+}
+
+@keyframes reverseAnimationMessage {
+  from {
+    transform: translateY(-37px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.allAnimation {
+  animation: allAnimation 0.3s ease-in-out both;
+}
+
+@keyframes allAnimation {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-35px);
+  }
+}
+
+.reverseNameAnimation {
+  animation: reverseNameAnimation 0.3s ease-in-out both;
+}
+
+@keyframes reverseNameAnimation {
+  from {
+    transform: translateY(-35px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.reverseEmailAnimation {
+  animation: reverseEmailAnimation 0.3s ease-in-out both;
+}
+
+@keyframes reverseEmailAnimation {
+  from {
+    transform: translateY(-35px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.reverseSubjectAnimation {
+  animation: reverseSubjectAnimation 0.3s ease-in-out both;
+}
+
+@keyframes reverseSubjectAnimation {
+  from {
+    transform: translateY(-35px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
