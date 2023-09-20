@@ -49,7 +49,7 @@ function Home() {
           >
             <div
               className={`bg-repeat h-24 bg-contain  w-screen w1024:bg-no-repeat w1024:bg-cover ${
-                themeChange ? "bg-footerDark" : "bg-footerLight"
+                themeChange ? style.bgLight : style.bgDark
               }`}
             ></div>
           </div>

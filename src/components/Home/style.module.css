@@ -5,3 +5,11 @@
 .btnAni:hover {
   transform: scale(1.1);
 }
+
+.bgDark {
+  background-image: url("../../assets/images/ingredients-light.png");
+}
+
+.bgLight {
+  background-image: url("../../assets/images/ingredients-dark.png");
+}
