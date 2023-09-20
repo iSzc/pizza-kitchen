@@ -1,7 +1,7 @@
-<h1 align="center">Space Tourism</h1>
+<h1 align="center">Pizza kitchen</h1>
 
 <p align="center">
-  <img alt="Space Tourism Site" src="./public/images/pizza-kitchen.png">
+  <img alt="Pizza kitchen Site" src="./public/pizza-kitchen.png">
 </p>
 
 ## 💣 Projeto
