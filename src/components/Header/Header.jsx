@@ -8,6 +8,7 @@ import style from "./style.module.css";
 import { Link } from "react-router-dom";
 import ButtonHeader from "./ButtonHeader/ButtonHeader";
 import Logout from "../Signup/Logout";
+import { motion } from "framer-motion";
 
 function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,11 +33,11 @@ function Header(props) {
   return (
     <main
       className={`w-screen flex flex-col z-[1] fixed  ${
-        themeChange ? "bg-blackTheme" : "bg-white"
+        themeChange ? "bg-darkTheme" : "bg-white"
       } ${props.className}`}
     >
       <div className="flex justify-between items-center  h-24 px-20 w1024:px-6 shadow-customShadow ">
-        <div className="w-48 h-full flex items-center gap-x-4 z-[0] max-w-[1240px]">
+        <motion.div className="w-48 h-full flex items-center gap-x-4 z-[0] max-w-[1240px]">
           <Link to="/">
             <button className={`w-12 h-12 cursor-pointer mt-2`}>
               <img
@@ -55,10 +56,10 @@ function Header(props) {
               Pizza Kitchen
             </button>
           </Link>
-        </div>
+        </motion.div>
         <div className="w1024:w-20 h-12 flex items-center w1024:justify-between relative">
           <div
-            className={`mr-12 gap-x-12  h-full items-center flex justify-between w1024:hidden`}
+            className={`mr-12 gap-x-12  h-full items-center flex justify-between w1024:hidden `}
           >
             <Link to="/contact">
               <ButtonHeader

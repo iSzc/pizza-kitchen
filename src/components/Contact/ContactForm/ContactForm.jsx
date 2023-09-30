@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useApp } from "../../AppContext";
 import style from "../../style.module.css";
+import { motion } from "framer-motion";
 
 function ContactForm({ setShowPopup, setNameValue }) {
   const { themeChange } = useApp();
@@ -75,7 +76,7 @@ function ContactForm({ setShowPopup, setNameValue }) {
       <label
         htmlFor={fieldName}
         className={`absolute px-2 ml-4 text-[#fb7a1e] font-semibold ${
-          themeChange ? "bg-[#121417]" : "bg-white"
+          themeChange ? "bg-darkTheme" : "bg-white"
         } ${
           focusedField === fieldName || formData[fieldName] !== ""
             ? style.allAnimation
@@ -94,14 +95,17 @@ function ContactForm({ setShowPopup, setNameValue }) {
         onFocus={() => handleFocus(fieldName)}
         onBlur={handleBlur}
         className={`w-full rounded border-2 h-14 pl-4 ${
-          themeChange ? "bg-[#121417] border-white text-white" : "border-black"
+          themeChange ? "bg-darkTheme border-white text-white" : "border-black"
         }`}
       />
     </div>
   );
 
   return (
-    <form
+    <motion.form
+      initial={{ x: 20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
       onSubmit={handleSubmit}
       className="flex flex-col px-4 w-full mt-6 gap-y-8"
     >
@@ -120,7 +124,7 @@ function ContactForm({ setShowPopup, setNameValue }) {
         <label
           htmlFor="message"
           className={`absolute px-2 ml-4 mb-8 text-[#fb7a1e] font-semibold ${
-            themeChange ? "bg-[#121417]" : "bg-white"
+            themeChange ? "bg-darkTheme" : "bg-white"
           } ${
             focusedField === "inputMessageValue" ||
             formData.inputMessageValue !== ""
@@ -141,7 +145,7 @@ function ContactForm({ setShowPopup, setNameValue }) {
           onBlur={handleBlur}
           className={`w-full rounded border-2 pl-4 pt-3 resize-none ${
             themeChange
-              ? "bg-[#121417] border-white text-white"
+              ? "bg-darkTheme border-white text-white"
               : "border-black"
           }`}
         />
@@ -156,7 +160,7 @@ function ContactForm({ setShowPopup, setNameValue }) {
           Enviar
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 }
 

@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Footer from "./Footer/Footer";
 import ContactForm from "./ContactForm/ContactForm";
 import ConfirmationPopup from "./ConfirmationPopup/ConfirmationPopup";
+import { motion } from "framer-motion";
 
 function Contact() {
   const { themeChange, setThemeChange } = useApp();
@@ -18,14 +19,19 @@ function Contact() {
   });
 
   return (
-    <main className={`${themeChange ? "bg-[#121417]" : "bg-white"} h-screen `}>
+    <main className={`${themeChange ? "bg-darkTheme" : "bg-white"} h-screen `}>
       <Header themeChange={themeChange} setThemeChange={setThemeChange} />
       <section
         className={`z-[0] w-screen absolute  ${
-          themeChange ? "bg-[#121417]" : "bg-white"
+          themeChange ? "bg-darkTheme" : "bg-white"
         } z-[-1] flex flex-col w1280:justify-center`}
       >
-        <div className={`max-w-[640px] flex flex-col mt-36 self-center `}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className={`max-w-[640px] flex flex-col mt-36 self-center `}
+        >
           <div className="px-4 flex flex-col">
             <span
               className={`text-3xl w-full w640:text-center font-Overpass font-bold ${
@@ -53,7 +59,7 @@ function Contact() {
             showPopup={showPopup}
             inputNameValue={formData.inputNameValue}
           />
-        </div>
+        </motion.div>
         <Footer />
       </section>
     </main>

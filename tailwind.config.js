@@ -23,15 +23,13 @@ export default {
     },
     extend: {
       colors: {
-        blackTheme: "#121417",
+        darkTheme: "#121417",
       },
       boxShadow: {
         customShadow: "0 3px 30px -15px rgba(0, 0, 0, 0.3)",
         customShadowBox: "0 1px 30px 10px rgba(0, 0, 0, .5)",
       },
       backgroundImage: {
-        footerLight: "url('./src/assets/images/ingredients-light.png')",
-        footerDark: "url('./src/assets/images/ingredients-dark.png')",
         aboutUsImg: "url('./src/assets/images/about-us-img.jpg')",
       },
     },

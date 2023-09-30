@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { useApp } from "../AppContext";
 import { Link } from "react-router-dom";
 import style from "../style.module.css";
+import { motion } from "framer-motion";
 
 function Recover() {
   const { themeChange, setThemeChange, auth } = useApp();
@@ -28,7 +29,7 @@ function Recover() {
 
       setTimeout(() => {
         window.location.href = "/login";
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.error("erro ao enviar email de recuperação de senha", error);
     }
@@ -42,7 +43,12 @@ function Recover() {
           themeChange ? "bg-[#121417]" : "bg-white"
         } z-[-1] flex flex-col w1280:justify-center items-center`}
       >
-        <div className="w-full mt-64 flex flex-col gap-y-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="w-full mt-64 flex flex-col gap-y-8"
+        >
           <div className="w-full flex justify-center">
             <span
               className={`text-center font-Overpass text-3xl font-semibold ${
@@ -55,7 +61,7 @@ function Recover() {
           <div>
             {resetEmailSent ? (
               <p
-                className={`flex justify-center ${
+                className={`flex justify-center w600:text-center ${
                   themeChange ? "text-white" : ""
                 }`}
               >
@@ -63,7 +69,10 @@ function Recover() {
                 entrada
               </p>
             ) : (
-              <form
+              <motion.form
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
                 onSubmit={handleResetPassword}
                 className="w600:w-full flex justify-center"
               >
@@ -99,7 +108,7 @@ function Recover() {
                       onBlur={handleBlur}
                       className={`w-full rounded border-2 h-14 pl-4 ${
                         themeChange
-                          ? "bg-[#121417] border-white text-white"
+                          ? "bg-[#121417] border-white text-white "
                           : "border-black"
                       } `}
                     />
@@ -116,7 +125,7 @@ function Recover() {
                     </button>
                   </div>
                 </fieldset>
-              </form>
+              </motion.form>
             )}
           </div>
 
@@ -132,7 +141,7 @@ function Recover() {
               </button>
             </Link>
           </span>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useApp } from "../AppContext";
-import style from "./style.module.css";
 import iconStar from "../../assets/images/icon-star.svg";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Feedback({ showFeedback, setShowFeedback, onClick, value }) {
   const { themeChange } = useApp();
@@ -41,57 +41,60 @@ function Feedback({ showFeedback, setShowFeedback, onClick, value }) {
 
   return (
     <>
-      {showFeedback && (
-        <div
-          className={`h-full w-screen relative z-[3333] flex justify-center items-center`}
-        >
+      <AnimatePresence>
+        {showFeedback && (
           <div
-            className={`gap-x-4 w-96 rounded-xl relative flex flex-col mx-2 ${
-              showFeedback ? "opacity-[1]" : ""
-            } ${showFeedback ? style.popupactive : ""} ${
-              themeChange
-                ? "bg-[#252d37] opacity-[1]"
-                : "bg-white shadow-customShadowBox"
-            }  `}
+            className={`h-full w-screen relative z-[3333] flex justify-center items-center`}
           >
-            <div
-              className={`mt-4 ml-6 w-10 h-10 flex justify-center items-center rounded-full ${
-                themeChange ? "bg-[#373f4a]" : "bg-[#e5e7ea]"
-              }`}
+            <motion.div
+              initial={{ y: "-150%", x: "0%", opacity: 0 }}
+              animate={{ y: "0%", x: "0%", opacity: 1 }}
+              exit={{ y: "-150%", x: "0%", opacity: 0 }}
+              className={`gap-x-4 w-96 rounded-xl relative flex flex-col  ${
+                themeChange
+                  ? "bg-[#252d37] opacity-[1]"
+                  : "bg-white shadow-customShadowBox"
+              }  `}
             >
-              <img src={iconStar} alt="Icon Star" className="h-4 w-4" />
-            </div>
-            <span
-              className={`px-4 mt-4 text-xl text-center w-full font-semibold text-center ${
-                themeChange ? "text-white" : ""
-              }`}
-            >
-              O que achou do nosso atendimento?
-            </span>
-            <span className="mt-6 px-4 text-center text-[#a3abb7]">
-              Por favor, conte-nos como foi o seu pedido. Todos os comentários
-              serão lidos e analisados para que melhoremos cada vez mais.
-            </span>
-            <div className="flex justify-around mt-8  mb-6 mb-6">
-              {renderButton("1")}
-              {renderButton("2")}
-              {renderButton("3")}
-              {renderButton("4")}
-              {renderButton("5")}
-            </div>
-            {buttonClicked && (
-              <div className="mt-6 mb-6 h-14 px-10">
-                <button
-                  className="bg-[#fb7413] text-white w-full h-full rounded-full font-Overpass font-semibold tracking-[2px]"
-                  onClick={handleFeedbackClick}
-                >
-                  ENVIAR
-                </button>
+              <div
+                className={`mt-4 ml-6 w-10 h-10 flex justify-center items-center rounded-full ${
+                  themeChange ? "bg-[#373f4a]" : "bg-[#e5e7ea]"
+                }`}
+              >
+                <img src={iconStar} alt="Icon Star" className="h-4 w-4" />
               </div>
-            )}
+              <span
+                className={`px-4 mt-4 text-xl text-center w-full font-semibold text-center ${
+                  themeChange ? "text-white" : ""
+                }`}
+              >
+                O que achou do nosso atendimento?
+              </span>
+              <span className="mt-6 px-4 text-center text-[#a3abb7]">
+                Por favor, conte-nos como foi o seu pedido. Todos os comentários
+                serão lidos e analisados para que melhoremos cada vez mais.
+              </span>
+              <div className="flex justify-around mt-8  mb-6 mb-6">
+                {renderButton("1")}
+                {renderButton("2")}
+                {renderButton("3")}
+                {renderButton("4")}
+                {renderButton("5")}
+              </div>
+              {buttonClicked && (
+                <div className="mt-6 mb-6 h-14 px-10">
+                  <button
+                    className="bg-[#fb7413] text-white w-full h-full rounded-full font-Overpass font-semibold tracking-[2px]"
+                    onClick={handleFeedbackClick}
+                  >
+                    ENVIAR
+                  </button>
+                </div>
+              )}
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }

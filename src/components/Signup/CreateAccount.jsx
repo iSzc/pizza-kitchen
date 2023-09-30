@@ -4,6 +4,10 @@ import Header from "../Header/Header";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import style from "../style.module.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import eye from "../../assets/images/eye.svg";
+import eyeOff from "../../assets/images/eye-off.svg";
+import usePasswordToggle from "../Hook/passwordToggle";
 
 function CreateAccount() {
   const { themeChange, setThemeChange, auth } = useApp();
@@ -13,6 +17,8 @@ function CreateAccount() {
   const [passwordErrorVisible, setPasswordErrorVisible] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const [accConfirmation, setAccConfirmation] = useState(false);
+  const [visiblePassword, showPassword, togglePasswordVisibility] =
+    usePasswordToggle("password");
 
   const handleFocus = (fieldName) => {
     setFocusedField(fieldName);
@@ -61,22 +67,31 @@ function CreateAccount() {
             window.location.href = "/login";
           }, 1000);
         } catch (error) {
-          alert("Este email já esta em uso");
-          console.error("falha ao criar:", error);
+          if (password.length <= 5) {
+            alert("A senha precisa conter pelo menos 6 caracteres válidos.");
+          } else {
+            alert("Este email já esta em uso.");
+            console.error("falha ao criar:", error);
+          }
         }
       }
     }
   };
 
   return (
-    <main className={`${themeChange ? "bg-[#121417]" : "bg-white"} h-screen `}>
+    <main className={`${themeChange ? "bg-darkTheme" : "bg-white"} h-screen `}>
       <Header themeChange={themeChange} setThemeChange={setThemeChange} />
       <section
         className={`z-[0] w-screen absolute  ${
-          themeChange ? "bg-[#121417]" : "bg-white"
+          themeChange ? "bg-darkTheme" : "bg-white"
         } z-[-1] flex flex-col w1280:justify-center items-center`}
       >
-        <div className="w-full mt-64 flex flex-col gap-y-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="w-full mt-64 flex flex-col gap-y-8"
+        >
           <div className="w-full flex justify-center">
             <span
               className={`text-center font-Overpass text-3xl font-semibold ${
@@ -86,13 +101,16 @@ function CreateAccount() {
               CRIAR
             </span>
           </div>
-          <form
+          <motion.form
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             onSubmit={handleFormSubmit}
             className="w600:w-full flex justify-center"
           >
             <fieldset className="px-2 w600:w-full w-[600px]">
               <div
-                className={`flex items-center border-4 border-transparent  ${
+                className={`flex items-center border-4 border-transparent relative  ${
                   themeChange ? "border-[#121417]" : ""
                 } ${
                   focusedField === "email"
@@ -103,7 +121,7 @@ function CreateAccount() {
                 <label
                   htmlFor="email"
                   className={`absolute px-2 ml-4 text-[#fb7a1e] font-semibold ${
-                    themeChange ? "bg-[#121417]" : "bg-white"
+                    themeChange ? "bg-darkTheme" : "bg-white"
                   } ${
                     focusedField === "email" || email !== ""
                       ? style.allAnimation
@@ -115,6 +133,7 @@ function CreateAccount() {
                 >
                   Email:
                 </label>
+
                 <input
                   id="email"
                   type="email"
@@ -125,14 +144,14 @@ function CreateAccount() {
                   onBlur={handleBlur}
                   className={`w-full rounded border-2 h-14 pl-4 ${
                     themeChange
-                      ? "bg-[#121417] border-white text-white"
+                      ? "bg-darkTheme border-white text-white"
                       : "border-black"
                   }`}
                 />
               </div>
 
               <div
-                className={`flex items-center border-4 border-transparent mt-5 ${
+                className={`flex items-center border-4 border-transparent mt-5 relative ${
                   themeChange ? "border-[#121417]" : ""
                 } ${
                   focusedField === "password"
@@ -143,7 +162,7 @@ function CreateAccount() {
                 <label
                   htmlFor="password"
                   className={`absolute px-2 ml-4 text-[#fb7a1e] font-semibold ${
-                    themeChange ? "bg-[#121417]" : "bg-white"
+                    themeChange ? "bg-darkTheme" : "bg-white"
                   } ${
                     focusedField === "password" || password !== ""
                       ? style.allAnimation
@@ -154,7 +173,7 @@ function CreateAccount() {
                 </label>
                 <input
                   id="password"
-                  type="password"
+                  type={visiblePassword}
                   value={password}
                   required
                   onChange={handlePasswordChange}
@@ -162,13 +181,23 @@ function CreateAccount() {
                   onBlur={handleBlur}
                   className={`w-full rounded border-2 h-14 pl-4 ${
                     themeChange
-                      ? "bg-[#121417] border-white text-white"
+                      ? "bg-darkTheme border-white text-white"
                       : "border-black"
                   }`}
                 />
+                <img
+                  onClick={togglePasswordVisibility}
+                  src={`
+                    
+                    ${showPassword ? eye : eyeOff}`}
+                  alt=""
+                  className={`${
+                    themeChange ? style.imgFooter : ""
+                  } absolute text-white right-3 cursor-pointer`}
+                />
               </div>
               <div
-                className={`flex items-center border-4 border-transparent mt-5 ${
+                className={`flex items-center border-4 border-transparent mt-5 relative ${
                   themeChange ? "border-[#121417]" : ""
                 } ${
                   focusedField === "confirmPassword"
@@ -179,7 +208,7 @@ function CreateAccount() {
                 <label
                   htmlFor="confirmPassword"
                   className={`absolute px-2 ml-4 text-[#fb7a1e] font-semibold ${
-                    themeChange ? "bg-[#121417]" : "bg-white"
+                    themeChange ? "bg-darkTheme" : "bg-white"
                   } ${
                     focusedField === "confirmPassword" || confirmPassword !== ""
                       ? style.allAnimation
@@ -190,7 +219,7 @@ function CreateAccount() {
                 </label>
                 <input
                   id="confirmPassword"
-                  type="password"
+                  type={visiblePassword}
                   value={confirmPassword}
                   required
                   onChange={handlePasswordConfirmChange}
@@ -198,19 +227,13 @@ function CreateAccount() {
                   onBlur={handleBlur}
                   className={`w-full rounded border-2 h-14 pl-4 ${
                     themeChange
-                      ? "bg-[#121417] border-white text-white"
+                      ? "bg-darkTheme border-white text-white"
                       : "border-black"
                   }`}
                 />
               </div>
               {!passwordErrorVisible && (
-                <span
-                  className={` ${
-                    themeChange
-                      ? "text-red-600 font-semibold"
-                      : "text-red-600 font-semibold"
-                  }`}
-                >
+                <span className="text-red-600 font-semibold">
                   SENHAS NÃO CONFEREM
                 </span>
               )}
@@ -225,7 +248,7 @@ function CreateAccount() {
                 </button>
               </div>
             </fieldset>
-          </form>
+          </motion.form>
 
           <div className="flex flex-col items-center gap-y-4">
             <span className="flex w425:flex-col">
@@ -244,7 +267,7 @@ function CreateAccount() {
               </Link>
             </span>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

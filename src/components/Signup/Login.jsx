@@ -4,12 +4,19 @@ import Header from "../Header/Header";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import style from "../style.module.css";
+import eye from "../../assets/images/eye.svg";
+import eyeOff from "../../assets/images/eye-off.svg";
+import usePasswordToggle from "../Hook/passwordToggle";
+import { motion } from "framer-motion";
 
 function Login() {
   const { themeChange, setThemeChange, auth } = useApp();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focusedField, setFocusedField] = useState(null);
+
+  const [visiblePassword, showPassword, togglePasswordVisibility] =
+    usePasswordToggle("password");
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
@@ -70,7 +77,12 @@ function Login() {
           themeChange ? "bg-[#121417]" : "bg-white"
         } z-[-1] flex flex-col w1280:justify-center items-center`}
       >
-        <div className="w-full mt-64 flex flex-col gap-y-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="w-full mt-64 flex flex-col gap-y-8"
+        >
           <div className="w-full flex justify-center">
             <span
               className={`text-center font-Overpass text-3xl font-semibold ${
@@ -80,7 +92,10 @@ function Login() {
               ENTRAR
             </span>
           </div>
-          <form
+          <motion.form
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             onSubmit={handleFormSubmit}
             className="w600:w-full flex justify-center"
           >
@@ -126,7 +141,7 @@ function Login() {
               </div>
 
               <div
-                className={`flex items-center border-4 border-transparent mt-5 ${
+                className={`flex items-center border-4 border-transparent mt-5 relative ${
                   themeChange ? "border-[#121417]" : ""
                 } ${
                   focusedField === "password"
@@ -148,7 +163,7 @@ function Login() {
                 </label>
                 <input
                   id="password"
-                  type="password"
+                  type={visiblePassword}
                   value={password}
                   required
                   onChange={handlePasswordChange}
@@ -159,6 +174,16 @@ function Login() {
                       ? "bg-[#121417] border-white text-white"
                       : "border-black"
                   }`}
+                />
+                <img
+                  onClick={togglePasswordVisibility}
+                  src={`
+                    
+                    ${showPassword ? eye : eyeOff}`}
+                  alt=""
+                  className={`${
+                    themeChange ? style.imgFooter : ""
+                  } absolute text-white right-3 cursor-pointer`}
                 />
               </div>
               <div className="mt-8 flex justify-center">
@@ -172,7 +197,7 @@ function Login() {
                 </button>
               </div>
             </fieldset>
-          </form>
+          </motion.form>
 
           <div className="flex flex-col items-center gap-y-4">
             <span>
@@ -204,7 +229,7 @@ function Login() {
               </Link>
             </span>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );
