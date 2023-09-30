@@ -64,7 +64,7 @@ function CreateAccount() {
           setAccConfirmation(true);
 
           setTimeout(() => {
-            window.location.href = "/Login";
+            window.location.href = "/login";
           }, 1000);
         } catch (error) {
           if (password.length <= 5) {
