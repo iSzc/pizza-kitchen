@@ -16,6 +16,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [Vite](https://vitejs.dev/)
 - [Tailwindcss](https://tailwindcss.com)
+- [Firebase](https://firebase.google.com)
 
 ## 🚀 Como executar
 
