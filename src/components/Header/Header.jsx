@@ -119,7 +119,7 @@ function Header(props) {
       </div>
       {isOpen && (
         <div
-          className={`fixed h-screen w425:w-[220px] w768:w-[300px] w-[400px] flex flex-col right-0 items-start pl-8  gap-y-8 pt-48 bg-[#fb7442] z-0 opacity-[.90] ${style.animation} text-base font-Overpass font-semibold hidden w1024:flex`}
+          className={`fixed h-screen w425:w-[220px] w768:w-[300px] w-[400px] flex flex-col right-0 items-start pl-8  gap-y-8 pt-48 bg-[#fb7442] z-0 opacity-[.95] ${style.animation} text-base font-Overpass font-semibold hidden w1024:flex`}
         >
           <Link to="/contact">
             <button className={`${themeChange ? "text-white" : ""}`}>
